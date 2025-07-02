@@ -6,7 +6,7 @@ This repository hosts the lab guide for Lab 15 - Backup/DR with Veeam Kasten.
 
 It is designed to work with the Showroom lab environment provided by the Red Hat Demo Platform (RHDP) team.
 
-Kasten by Veeam is a Kubernetes-native data protection platform designed to secure, manage, and recover containerized applications. On Red Hat OpenShift, Kasten extends its capabilities to protect both containerized workloads and traditional virtual machines (VMs), offering a unified approach to backup, disaster recovery, and application mobility. By leveraging OpenShift’s hybrid cloud infrastructure, Kasten ensures consistent data protection policies across environments, enabling organizations to meet compliance requirements and maintain business continuity with minimal operational overhead.
+Veeam Kasten is a Kubernetes-native data protection platform designed to secure, manage, and recover containerized applications. On Red Hat OpenShift, Kasten extends its capabilities to protect both containerized workloads and traditional virtual machines (VMs), offering a unified approach to backup, disaster recovery, and application mobility. By leveraging OpenShift’s hybrid cloud infrastructure, Kasten ensures consistent data protection policies across environments, enabling organizations to meet compliance requirements and maintain business continuity with minimal operational overhead.
 
 In this lab we will explore disaster recovery, backup and restore of Virtual Machines (Module 1) and Containers (Module 2) on OpenShift using the Veeam Kasten product.
 
