@@ -10,9 +10,16 @@ asciidoc:
     lab_name: Lab 15 - Backup/DR with Veeam Kasten K10
     release-version: master
     page-pagination: true
-  page-links:
-  - url: https://redhat.com
-    text: Red Hat
+    user: user1
+    password: redhat
+    kasten_dashboard: https://kasten.example.com
+    openshift_console_url: https://console.example.com
+    kasten_storageclass: px-csi
+    mongodb_root_password: testpass
+    kasten_backup_bucket_host: bucket.example.com
+    page-links:
+    - url: https://redhat.com
+      text: Red Hat
 
   extensions:
   - ./content/lib/tab-block.js
