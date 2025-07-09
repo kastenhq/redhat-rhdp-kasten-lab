@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Installing Veeam Kasten :: Lab 15 - Backup/DR with Veeam Kasten K10</title>
-    <link rel="prev" href="#module01-intro.adoc">
+    <link rel="prev" href="module01-intro.html">
     <link rel="next" href="module01-lab02-location-profile.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -47,7 +47,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
+    <a class="nav-link" href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
@@ -68,16 +68,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
+    <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
+    <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab03-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
+    <a class="nav-link" href="module02-lab03-backup-recovery.html">Backup and Recover our Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module02-lab04-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
   </li>
 </ul>
   </li>
@@ -109,7 +112,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Lab 15 - Backup/DR with Veeam Kasten K10</a></li>
-    <li><a href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
+    <li><a href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
     <li><a href="module01-lab01-install.html">Installing Veeam Kasten</a></li>
   </ul>
 </nav>
@@ -117,40 +120,8 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Installing Veeam Kasten</h1>
-<div class="sect1">
-<h2 id="_1_introduction"><a class="anchor" href="#_1_introduction"></a>1. Introduction</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>This add-on lab guide is intended to familiarize practitioners with the protection of OpenShift Virtualization workloads using <strong><em>Veeam Kasten for Kubernetes</em></strong>.
-It assumes the learner has completed other <strong><em>OpenShift Virtualization Roadshow</em></strong> lab exercises and are familiar with virtual machine provisioning and management in OpenShift.</p>
-</div>
-<div class="sect2">
-<h3 id="_what_is_veeam_kasten"><a class="anchor" href="#_what_is_veeam_kasten"></a>What is Veeam Kasten?</h3>
-<div class="paragraph">
-<p><strong><em>Veeam Kasten for Kubernetes</em></strong> is a purpose-built data protection solution for Kubernetes that enables organizations to perform backup &amp; restore, disaster recovery, and cross-cluster mobility of their applications.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_how_does_kasten_work"><a class="anchor" href="#_how_does_kasten_work"></a>How does Kasten work?</h3>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab01-install/00.png" alt="00">
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Kasten is deployed to the cluster that it protects.
-Within the cluster, Kasten communicates with the Kubernetes API server to discover applications and their resources.</p>
-</li>
-<li>
-<p>Kasten orchestrates point-in-time snapshots of complete applications, including both application manifest data and storage volume data.</p>
-</li>
-<li>
-<p>Kasten exports portable copies of the point-in-time snapshot to an external object, NFS, or Veeam repository.</p>
-</li>
-</ol>
-</div>
 <div class="exampleblock">
 <div class="content">
 <div class="admonitionblock important">
@@ -160,22 +131,20 @@ Within the cluster, Kasten communicates with the Kubernetes API server to discov
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-We have pre-staged the lab with an install of Veeam Kasten, so there&#8217;s no need to complete the steps in Section 2.
+We have pre-staged the lab with an install of Veeam Kasten, so there&#8217;s no need to complete the installation steps in Lab 1.
 Rather, this section just highlights how&#8217;d you go about installing Kasten if it were not already installed on the OpenShift cluster.
+<br>
+Make sure you follow the instructions to access the Kasten K10 Dashboard in <a href="#access-dashboard">3. Accessing the Kasten Dashboard</a> of this lab though!
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Make sure you follow the instructions to access the Kasten K10 Dashboard in section 3 of this lab though!</p>
-</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_installing_kasten"><a class="anchor" href="#_2_installing_kasten"></a>2. Installing Kasten</h2>
+<h2 id="_1_installing_kasten"><a class="anchor" href="#_1_installing_kasten"></a>1. Installing Kasten</h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -392,7 +361,7 @@ The <code>k10.kasten.io/is-snapshot-class</code> annotation is used by Kasten to
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_accessing_the_kasten_dashboard"><a class="anchor" href="#_3_accessing_the_kasten_dashboard"></a>3. Accessing the Kasten Dashboard</h2>
+<h2 id="access-dashboard"><a class="anchor" href="#access-dashboard"></a>3. Accessing the Kasten Dashboard</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -468,7 +437,7 @@ As Kasten is built on Kubernetes-native resources, custom roles can be built and
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="#module01-intro.adoc" class="query-params-link">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></span>
+  <span class="prev"><a href="module01-intro.html" class="query-params-link">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></span>
   <span class="next"><a href="module01-lab02-location-profile.html" class="query-params-link">Configuring Veeam Kasten for Backups</a></span>
 </nav>
 </article>

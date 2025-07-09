@@ -47,7 +47,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
+    <a class="nav-link" href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
@@ -68,16 +68,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
+    <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
+    <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab03-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
+    <a class="nav-link" href="module02-lab03-backup-recovery.html">Backup and Recover our Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module02-lab04-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
   </li>
 </ul>
   </li>
@@ -109,7 +112,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Lab 15 - Backup/DR with Veeam Kasten K10</a></li>
-    <li><a href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
+    <li><a href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
     <li><a href="module01-lab03-backup-restore.html">Protecting Virtual Machines</a></li>
   </ul>
 </nav>
@@ -121,15 +124,33 @@
 <h2 id="_1_introduction"><a class="anchor" href="#_1_introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>In this exercise you will create and run a Kasten policy for protecting Virtual Machines running on OpenShift and test restoring from both local and remote backup sources.</em></p>
+<p>In this exercise you will create and run a Kasten policy for protecting Virtual Machines running on OpenShift and test restoring from both local and remote backup sources.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_2_creating_a_vm"><a class="anchor" href="#_2_creating_a_vm"></a>2. Creating a VM</h2>
 <div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+At the time of this lab&#8217;s authoring, it is recommended to provision only one virtual machine per project/namespace to ensure that the Kasten datamover can efficiently export the VM data.<br>
+<br>
+In future releases, Kasten will support multiple VMs per project/namespace, but this is not yet available.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="paragraph">
-<p>Fist you will create a new VM in a new project to use for the exercise.</p>
+<p>First you will create a new VM in a new project to use for the exercise.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -156,15 +177,14 @@
 </div>
 <div class="exampleblock">
 <div class="content">
-<div class="admonitionblock caution">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Kasten can be used to protect VMs provisioned using an <code>InstanceType</code> but currently requires a manual transform be applied during the restore process, which is out of the scope of this lab exercise.
-Full support for <code>InstanceTypes</code> will be added in an upcoming release.
+Kasten can be used to protect VMs provisioned using an <code>InstanceType</code> as well without any additional configuration. This capability was introduced in Kasten v7.5.0.
 </td>
 </tr>
 </table>
@@ -196,7 +216,7 @@ Full support for <code>InstanceTypes</code> will be added in an upcoming release
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This will provision the VM with preferred storage settings for the <code>px-csi</code> StorageClass, specifically <strong><em>Block VolumeMode</em></strong> to provide the <strong><em>ReadWriteMany</em></strong> access required to enable live migration between OpenShift nodes.
+This will provision the VM with preferred storage settings for the <code>ocs-storagecluster-ceph-rbd-virtualization</code> StorageClass, specifically <strong><em>Block VolumeMode</em></strong> to provide the <strong><em>ReadWriteMany</em></strong> access required to enable live migration between OpenShift nodes.
 </td>
 </tr>
 </table>
@@ -239,13 +259,13 @@ This is skipped in the lab exercise as the <code>openshift-storage.rbd.csi.ceph.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Your <code>StorageClass</code> has already been set up to allow the Kasten datamover to export raw Block volumes using the <code>px-csi</code> StorageClass:</p>
+<p>Your <code>StorageClass</code> has already been set up to allow the Kasten datamover to export raw Block volumes using the <code>ocs-storagecluster-ceph-rbd-virtualization</code> StorageClass:</p>
 <div class="paragraph">
 <p>In the <strong><em>Web Terminal</em></strong>, run the following command to validate that the annotation is present (you should see an annotation starting with <code>k10.kastion.io</code>):</p>
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get sc px-csi -ojsonpath=='{.metadata.annotations}';echo</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get sc ocs-storagecluster-ceph-rbd-virtualization -ojsonpath=='{.metadata.annotations}';echo</code></pre>
 </div>
 </div>
 <div class="exampleblock">
@@ -510,7 +530,7 @@ This can be useful for familiarizing yourself with the Kubernetes-native APIs de
 <h2 id="_5_freezing_the_guest_filesystem"><a class="anchor" href="#_5_freezing_the_guest_filesystem"></a>5. Freezing the Guest Filesystem</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Kasten can freeze the guest filesystem before the snapshot and unfreeze after the snapshot completes by annotating the VirtualMachine resource with <code>k10.kasten.io/freezeVM=true</code>.</p>
+<p>Kasten can freeze the guest filesystem before the snapshot and unfreeze after the snapshot completes by either using the Virtual Machine dashboard within the Kasten web UI, or alternatively annotating the VirtualMachine resource with <code>k10.kasten.io/freezeVM=true</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">

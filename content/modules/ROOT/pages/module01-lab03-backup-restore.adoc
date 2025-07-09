@@ -2,11 +2,19 @@
 
 == 1. Introduction
 
-_In this exercise you will create and run a Kasten policy for protecting Virtual Machines running on OpenShift and test restoring from both local and remote backup sources._
+In this exercise you will create and run a Kasten policy for protecting Virtual Machines running on OpenShift and test restoring from both local and remote backup sources.
 
 == 2. Creating a VM
 
-Fist you will create a new VM in a new project to use for the exercise.
+====
+[IMPORTANT]
+
+At the time of this lab's authoring, it is recommended to provision only one virtual machine per project/namespace to ensure that the Kasten datamover can efficiently export the VM data. +
+ +
+In future releases, Kasten will support multiple VMs per project/namespace, but this is not yet available.
+====
+
+First you will create a new VM in a new project to use for the exercise.
 
 . In the *_OpenShift Console_*, navigate to *_Virtualization_* -> *_Virtual Machines_*.
 . To create a new project to work in select the *_Project_* menu and click *_Create Project_*.
@@ -19,10 +27,9 @@ image::module01-lab03-backup_restore/01.png[]
 image::module01-lab03-backup_restore/03.png[]
 +
 ====
-[CAUTION]
+[NOTE]
 
-Kasten can be used to protect VMs provisioned using an `InstanceType` but currently requires a manual transform be applied during the restore process, which is out of the scope of this lab exercise.
-Full support for `InstanceTypes` will be added in an upcoming release.
+Kasten can be used to protect VMs provisioned using an `InstanceType` as well without any additional configuration. This capability was introduced in Kasten v7.5.0.
 ====
 
 . Under *_Template catalog_*, select the `fedora-server-small` template.
@@ -186,7 +193,7 @@ This can be useful for familiarizing yourself with the Kubernetes-native APIs de
 
 == 5. Freezing the Guest Filesystem
 
-Kasten can freeze the guest filesystem before the snapshot and unfreeze after the snapshot completes by annotating the VirtualMachine resource with `k10.kasten.io/freezeVM=true`.
+Kasten can freeze the guest filesystem before the snapshot and unfreeze after the snapshot completes by either using the Virtual Machine dashboard within the Kasten web UI, or alternatively annotating the VirtualMachine resource with `k10.kasten.io/freezeVM=true`.
 
 . In the *_Web Terminal_*, enable filesystem freezing for `fedora-k10`:
 +

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Lab 3 - Backup and Restore a Workload :: Lab 15 - Backup/DR with Veeam Kasten K10</title>
-    <link rel="prev" href="module02-lab01-pacman.html">
+    <link rel="prev" href="#module02-lab02-configure.adoc">
     <link rel="next" href="module02-lab03-blueprints.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -73,6 +73,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#module02-lab02-configure.adoc">Deploy a Sample Application</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
   </li>
@@ -129,9 +132,6 @@
 <div class="sect1">
 <h2 id="_part_1_peform_a_backup"><a class="anchor" href="#_part_1_peform_a_backup"></a>📖 Part 1. Peform a backup</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><em>Before we can begin protecting our apps, we need to define a location for Kasten to export backup off of the cluster and primary storage.</em></p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -205,8 +205,21 @@
 oc exec -it deploy/pacman-mongodb -n pacman -- mongosh pacman --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD --eval 'db.dropDatabase();'</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>{: .important } &gt; This command is simulating a data compromise event, which could be something as innocent as an administrator &gt; accidentally dropping a table or database, or as nefarious as a ransomware attack</p>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This command is simulating a data compromise event, which could be something as innocent as an administrator &gt; accidentally dropping a table or database, or as nefarious as a ransomware attack
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </li>
 <li>
@@ -334,7 +347,7 @@ oc exec -it deploy/pacman-mongodb -n pacman -- mongosh pacman --authenticationDa
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module02-lab01-pacman.html" class="query-params-link">Deploy a Sample Application</a></span>
+  <span class="prev"><a href="#module02-lab02-configure.adoc" class="query-params-link">Deploy a Sample Application</a></span>
   <span class="next"><a href="module02-lab03-blueprints.html" class="query-params-link">Provide Application Consistent Backups via Kasten Blueprints</a></span>
 </nav>
 </article>

@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Lab 1 - Deploy a workload :: Lab 15 - Backup/DR with Veeam Kasten K10</title>
-    <link rel="prev" href="#module02-intro.adoc">
-    <link rel="next" href="module02-lab02-backup-recovery.html">
+    <link rel="prev" href="module02-intro.html">
+    <link rel="next" href="module02-lab02-configure.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -47,7 +47,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
+    <a class="nav-link" href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
@@ -68,16 +68,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
+    <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
+    <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab03-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
+    <a class="nav-link" href="module02-lab03-backup-recovery.html">Backup and Recover our Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module02-lab04-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
   </li>
 </ul>
   </li>
@@ -109,7 +112,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Lab 15 - Backup/DR with Veeam Kasten K10</a></li>
-    <li><a href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></li>
+    <li><a href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></li>
     <li><a href="module02-lab01-pacman.html">Deploy a Sample Application</a></li>
   </ul>
 </nav>
@@ -120,21 +123,37 @@
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_part_1_deploying_pacman_with_helm">📖 Part 1. Deploying Pacman with Helm</a></li>
-<li><a href="#_part_2_lets_play_some_pacman">📖 Part 2. Let’s Play some Pacman</a></li>
-<li><a href="#_part_3_takeaways">🏁 Part 3. Takeaways</a></li>
+<li><a href="#_1_deploying_pacman_with_helm">1. Deploying Pacman with Helm</a></li>
+<li><a href="#_2_lets_play_some_pacman">2. Let’s Play some Pacman</a></li>
+<li><a href="#_3_takeaways">3. Takeaways</a></li>
 </ul>
 </div>
 <div class="sect1">
-<h2 id="_part_1_deploying_pacman_with_helm"><a class="anchor" href="#_part_1_deploying_pacman_with_helm"></a>📖 Part 1. Deploying Pacman with Helm</h2>
+<h2 id="_1_deploying_pacman_with_helm"><a class="anchor" href="#_1_deploying_pacman_with_helm"></a>1. Deploying Pacman with Helm</h2>
 <div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+In this module, we will be deploying a containerized application. Ensure that you create a new, different namespace than what you may have created in the previous module (<code>kasten-lab-user1</code>) in the previous lab, you can continue using that project.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Using the bastion host, begin by creating a new namespace for your application:</p>
+<p>Add a new namespace for the Pacman application</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create namespace pacman</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create namespace `kasten-lab-{user}-pacman`</code></pre>
 </div>
 </div>
 </li>
@@ -151,7 +170,7 @@ helm repo update</pre>
 <p>Run the following to install the <code>pacman/pacman</code> Helm Chart:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm install pacman pacman/pacman -n pacman \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm install pacman pacman/pacman -n kasten-lab-{user}-pacman \
 --set route.create=true \
 --set mongodb.containerSecurityContext.enabled=false \
 --set mongodb.podSecurityContext.enabled=false \
@@ -170,8 +189,21 @@ helm repo update</pre>
 </div>
 <div class="title">Figure 1. pacman pods</div>
 </div>
-<div class="paragraph">
-<p>{: .note } Ensure you have the pacman project selected in the Project drop-down</p>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ensure you have the <code>kasten-lab-user1-pacman</code> project selected in the Project drop-down
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </li>
 </ol>
@@ -179,7 +211,7 @@ helm repo update</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_part_2_lets_play_some_pacman"><a class="anchor" href="#_part_2_lets_play_some_pacman"></a>📖 Part 2. Let’s Play some Pacman</h2>
+<h2 id="_2_lets_play_some_pacman"><a class="anchor" href="#_2_lets_play_some_pacman"></a>2. Let’s Play some Pacman</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -197,8 +229,21 @@ helm repo update</pre>
 </li>
 <li>
 <p>Click on the Location to launch pacman</p>
-<div class="paragraph">
-<p>{: .note } &gt; If pacman doesn’t load in the browser, ensure that the address bar is using HTTP (<a href="http://pacman-route-pacman" class="bare">http://pacman-route-pacman</a>), <em>not</em> HTTPS &gt; Occasionally browsers may try to force you to an HTTPS page which will not work for our default pacman app</p>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If pacman doesn’t load in the browser, ensure that the address bar is using HTTP (<a href="http://pacman-route-pacman" class="bare">http://pacman-route-pacman</a>), <em>not</em> HTTPS &gt; Occasionally browsers may try to force you to an HTTPS page which will not work for our default pacman app
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </li>
 <li>
@@ -221,7 +266,7 @@ helm repo update</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_part_3_takeaways"><a class="anchor" href="#_part_3_takeaways"></a>🏁 Part 3. Takeaways</h2>
+<h2 id="_3_takeaways"><a class="anchor" href="#_3_takeaways"></a>3. Takeaways</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -242,8 +287,8 @@ helm repo update</pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="#module02-intro.adoc" class="query-params-link">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></span>
-  <span class="next"><a href="module02-lab02-backup-recovery.html" class="query-params-link">Backup and Recover our Application</a></span>
+  <span class="prev"><a href="module02-intro.html" class="query-params-link">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></span>
+  <span class="next"><a href="module02-lab02-configure.html" class="query-params-link">Configure Kasten for Backup</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

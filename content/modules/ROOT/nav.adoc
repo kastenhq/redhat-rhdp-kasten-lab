@@ -9,5 +9,6 @@
 
 * xref:module02-intro.adoc[Module 2 - Protecting Containerized Workloads with Veeam Kasten]
 ** xref:module02-lab01-pacman.adoc[Deploy a Sample Application]
-** xref:module02-lab02-backup-recovery.adoc[Backup and Recover our Application]
-** xref:module02-lab03-blueprints.adoc[Provide Application Consistent Backups via Kasten Blueprints]
+** xref:module02-lab02-configure.adoc[Configure Kasten for Backup]
+** xref:module02-lab03-backup-recovery.adoc[Backup and Recover our Application]
+** xref:module02-lab04-blueprints.adoc[Provide Application Consistent Backups via Kasten Blueprints]

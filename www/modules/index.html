@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Welcome to Lab 15 - Backup/DR with Veeam Kasten K10! :: Lab 15 - Backup/DR with Veeam Kasten K10</title>
-    <link rel="next" href="#module01-intro.adoc">
+    <link rel="next" href="module01-intro.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -46,7 +46,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
+    <a class="nav-link" href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
@@ -67,16 +67,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
+    <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
+    <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab03-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
+    <a class="nav-link" href="module02-lab03-backup-recovery.html">Backup and Recover our Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module02-lab04-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
   </li>
 </ul>
   </li>
@@ -119,10 +122,10 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift and OpenShift Virtualization enables you to bring virtual machines onto a modern, Kubernetes-based infrastructure, allowing both containerized and VM workloads to run on a single platform. It enables the development and delivery of new applications as well as the modernization of existing ones and can create applications that consist of virtual machines, containers, and serverless functions - all managed together using Kubernetes-native tools and paradigms.</p>
+<p>Veeam Kasten is a Kubernetes-native data protection platform designed to secure, manage, and recover containerized applications and VMs, offering a unified approach to backup, disaster recovery, and application mobility. By leveraging OpenShift’s hybrid cloud infrastructure, Kasten ensures consistent data protection policies across environments, enabling organizations to meet compliance requirements and maintain business continuity with minimal operational overhead.</p>
 </div>
 <div class="paragraph">
-<p>In this lab we will explore disaster recovery, backup and restore of Virtual Machines and Containers using Veeam Kasten.</p>
+<p>In this lab we will explore disaster recovery, backup and restore of Virtual Machines (Module 1) and Containers (Module 2) on OpenShift using the Veeam Kasten product.</p>
 </div>
 </div>
 </div>
@@ -157,6 +160,9 @@
 <ul>
 <li>
 <p><em>Deploy a Sample Application</em>: In this section we will deploy a sample application to OpenShift.</p>
+</li>
+<li>
+<p><em>Configure Kasten for Backup</em>: In this section we will configure Kasten to use an S3-compatible object store for backup.</p>
 </li>
 <li>
 <p><em>Backup and Recover our Application</em>: In this section we will perform backup and recovery operations on the sample application.</p>
@@ -254,7 +260,7 @@ All screenshots in the following lab guides reference <strong>user1</strong>. Pl
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="#module01-intro.adoc" class="query-params-link">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></span>
+  <span class="next"><a href="module01-intro.html" class="query-params-link">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

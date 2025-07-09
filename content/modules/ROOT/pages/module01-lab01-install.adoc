@@ -1,33 +1,15 @@
 = Installing Veeam Kasten
 
-== 1. Introduction
-
-This add-on lab guide is intended to familiarize practitioners with the protection of OpenShift Virtualization workloads using *_Veeam Kasten for Kubernetes_*.
-It assumes the learner has completed other *_OpenShift Virtualization Roadshow_* lab exercises and are familiar with virtual machine provisioning and management in OpenShift.
-
-=== What is Veeam Kasten?
-
-*_Veeam Kasten for Kubernetes_* is a purpose-built data protection solution for Kubernetes that enables organizations to perform backup & restore, disaster recovery, and cross-cluster mobility of their applications.
-
-=== How does Kasten work?
-
-image::module01-lab01-install/00.png[]
-
-. Kasten is deployed to the cluster that it protects.
-Within the cluster, Kasten communicates with the Kubernetes API server to discover applications and their resources.
-. Kasten orchestrates point-in-time snapshots of complete applications, including both application manifest data and storage volume data.
-. Kasten exports portable copies of the point-in-time snapshot to an external object, NFS, or Veeam repository.
-
 ====
 [IMPORTANT]
 
-We have pre-staged the lab with an install of Veeam Kasten, so there's no need to complete the steps in Section 2.
+We have pre-staged the lab with an install of Veeam Kasten, so there's no need to complete the installation steps in Lab 1.
 Rather, this section just highlights how'd you go about installing Kasten if it were not already installed on the OpenShift cluster.
-
-Make sure you follow the instructions to access the Kasten K10 Dashboard in section 3 of this lab though!
+ +
+Make sure you follow the instructions to access the Kasten K10 Dashboard in <<access-dashboard>> of this lab though!
 ====
 
-== 2. Installing Kasten
+== 1. Installing Kasten
 
 ====
 [WARNING]
@@ -145,7 +127,7 @@ The `k10.kasten.io/is-snapshot-class` annotation is used by Kasten to determine 
 
 . Close the *_Web Terminal_*.
 
-== 3. Accessing the Kasten Dashboard
+== 3. Accessing the Kasten Dashboard [[access-dashboard]]
 
 . In a web browser navigate to the {kasten_dashboard}[Kasten Dashboard^].
 You should be redirected to the OpenShift OAuth login prompt.
