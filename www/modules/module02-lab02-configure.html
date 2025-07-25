@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Configuring Location Profiles :: Backup/DR/Mobility with Veeam Kasten</title>
-    <link rel="prev" href="module01-lab01-install.html">
-    <link rel="next" href="module01-lab03-backup-restore.html">
+    <title>Lab 2 - Configure Veeam Kasten :: Backup/DR/Mobility with Veeam Kasten</title>
+    <link rel="prev" href="module02-lab01-pacman.html">
+    <link rel="next" href="module02-lab03-backup-recovery.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -52,7 +52,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab02-location-profile.html">Configuring Veeam Kasten for Backups</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -73,7 +73,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -112,19 +112,48 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Backup/DR/Mobility with Veeam Kasten</a></li>
-    <li><a href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
-    <li><a href="module01-lab02-location-profile.html">Configuring Veeam Kasten for Backups</a></li>
+    <li><a href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></li>
+    <li><a href="module02-lab02-configure.html">Configure Kasten for Backup</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Configuring Location Profiles</h1>
+<h1 class="page">Lab 2 - Configure Veeam Kasten</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_1_configure_an_s3_compatible_object_store_for_backup">1. Configure an S3-compatible Object Store for Backup</a></li>
+<li><a href="#_2_configuring_an_object_bucket_claim_to_store_backups">2. Configuring an Object Bucket Claim to Store Backups</a></li>
+<li><a href="#_3_creating_an_s3_compatible_location_profile">3. Creating an S3-Compatible Location Profile</a></li>
+<li><a href="#create-policy">4. Creating a Kasten Policy</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you have already configured an S3-compatible object store for Kasten and created a location profile in the previous Module, you can skip to <a href="#create-policy">4. Creating a Kasten Policy</a> using the Location Profile you created previously.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_1_introduction"><a class="anchor" href="#_1_introduction"></a>1. Introduction</h2>
+<h2 id="_1_configure_an_s3_compatible_object_store_for_backup"><a class="anchor" href="#_1_configure_an_s3_compatible_object_store_for_backup"></a>1. Configure an S3-compatible Object Store for Backup</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You have now configured everything required to perform a local snapshot of a Kubernetes application using Kasten - <em>but snapshots are not backup!</em> In order to restore in the event the local cluster or primary storage is compromised, a copy of that data should be exported to another location.</p>
+<p>Out of the box, Kasten provides everything required to perform a local snapshot of a Kubernetes application (It does require <em>k10.kasten.io/is-snapshot-class: "true"</em> is set on the VolumeSnapshotClass, which has already been done when the lab was provisioned) - <em>but snapshots are not backup!</em> In order to restore in the event the local cluster or primary storage is compromised, a copy of that data should be exported to another location.</p>
 </div>
 <div class="paragraph">
 <p>The configuration of these backup targets are called <strong><em>Location Profiles</em></strong>.
@@ -231,27 +260,6 @@ Kasten supports immutable object storage and it is recommended to protect backup
 <div class="imageblock">
 <div class="content">
 <img src="_images/module01-lab02-location-profile/002.png" alt="002">
-</div>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If this is the first time you are opening a terminal you may need to <strong>Create a Project</strong> first to run your terminal pod in. In that case make sure you use <code>terminal-user1</code> as your project name to ensure that it is unique to you. Then click the blue <strong>Start</strong> button.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab02-location-profile/002a.png" alt="002a">
-</div>
-</div>
 </div>
 </div>
 </li>
@@ -429,9 +437,217 @@ See <a href="https://docs.kasten.io/latest/api/profiles.html">docs.kasten.io</a>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="create-policy"><a class="anchor" href="#create-policy"></a>4. Creating a Kasten Policy</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <strong><em>Kasten Dashboard</em></strong>, select <strong><em>Applications</em></strong> to view all discovered namespaces.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/07.png" alt="07">
+</div>
+</div>
+<div class="paragraph">
+<p>Your <code>kasten-lab-user1-pacman</code> application should appear as <strong><em>Unmanaged</em></strong>, indicating it is not being protected by any policy.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You will notice that you don&#8217;t see any namespaces starting with <code>openshift</code> in the list of applications.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Namespaces, including the <code>openshift-...</code> system namespaces can be excluded from the <strong><em>Applications</em></strong> list (and compliance reporting) by adding a list of <code>excludedApps</code> to the K10 Operand <code>spec</code>, as shown:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/08.png" alt="08">
+</div>
+</div>
+<div class="paragraph">
+<p>The following command can be used to produce a properly formatted list of namespaces beginning with <code>openshift</code> that can be copy/paste into the K10 Operand YAML tab:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get ns --no-headers=true | \
+  awk 'BEGIN { print "  excludedApps:" } /^openshift/{print "  -",$1}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your lab environment has already been configured to exclude system namespaces.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Click <code>kasten-lab-user1-pacman</code> in the <strong><em>Applications</em></strong> list to view details about the workloads and additional resources discovered within the namespace.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/09.png" alt="09">
+</div>
+</div>
+</li>
+<li>
+<p>Close the <strong><em>Application Details</em></strong> window.</p>
+</li>
+<li>
+<p>Under <code>kasten-lab-user1-pacman</code>, select <strong><em>&#8230;&#8203;
+→ Create a Policy</em></strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/10.png" alt="10">
+</div>
+</div>
+</li>
+<li>
+<p>Leave the defaults for <strong><em>Name</em></strong> and <strong><em>Action</em></strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/11.png" alt="11">
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Policy Presets provide the option of allowing administrators to define SLA-focused configurations to simplify self-service data protection for other users.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Leave the default <strong><em>Hourly Backup Frequency</em></strong> and <strong><em>Snapshot Retention</em></strong> values.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/12.png" alt="12">
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist NOTE">
+<ul class="NOTE">
+<li>
+<p>Toggling <strong><em>Advanced Frequency Options</em></strong> allows users to specify what time hourly snapshots occur, how many snapshots to take per hour, and which snapshots should be used for daily, weekly, monthly, and yearly promotion.</p>
+</li>
+<li>
+<p>Toggling <strong><em>Backup Window</em></strong> allows users to specify during what times is Kasten allowed to run the policy.</p>
+</li>
+<li>
+<p>Enabling <strong><em>Use Staggering</em></strong> can intelligently distribute when to start policies during the specified window such that the desired frequency is maintained, but with the least amount of policies running simultaneously, allowing Kasten to reduce the peak load on the cluster.</p>
+</li>
+<li>
+<p>These settings should be left unselected for this lab.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Toggle <strong><em>Enable Backups via Snapshot Exports</em></strong> and select <code>kastenbackups-user1</code> as the <strong><em>Export Location Profile</em></strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/13.png" alt="13">
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By default, Kasten will export all data associated with the snapshot to ensure you have a durable, off-cluster copy.
+However, there are circumstances where you may only want to export references to the snapshot, such as migrating a workload in AWS from one availability zone to another.
+This ability to only export snapshot metadata can dramatically improve performance in these specific instances.
+This can be configured under <strong><em>Advanced Export Settings</em></strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Under <strong><em>Select Applications</em></strong>, verify the <code>kasten-lab-user1-pacman</code> namespace has been selected.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module01-lab03-backup_restore/14.png" alt="14">
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Targeting application(s) based on namespace is generally the most straightforward method of defining a backup policy.
+However, Kasten also allows you to identify applications based on native Kubernetes labels.
+This is especially helpful if you have many VMs in a single namespace and only want to protect current and <strong><em>future</em></strong> VMs with a specific label on the <code>VirtualMachine</code> resource, such as <code>backup: gold</code> or <code>vm: prod</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Kasten also provides rich filtering capabilities to include or exclude resources based on Kubernetes <strong><em>API Group</em></strong>, <strong><em>API Version</em></strong>, <strong><em>Resource Type</em></strong>, <strong><em>Resource Name</em></strong>, and <strong><em>Labels</em></strong>.
+For example, you could exclude backup for <strong><em>Secrets</em></strong> resources where a label includes an indication that the secret is externally managed.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Leave the remaining settings as default.</p>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When performing many tasks within the Kasten UI, you can press the <strong><em>&lt;/&gt; YAML</em></strong> button to expose the native Kubernetes YAML that defines the resource created through the UI.
+This can be useful for familiarizing yourself with the Kubernetes-native APIs defined by Kasten and for extracting snippets for use in GitOps or Infrastructure-as-Code tools.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong><em>Create Policy</em></strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="module01-lab01-install.html" class="query-params-link">Installing Veeam Kasten</a></span>
-  <span class="next"><a href="module01-lab03-backup-restore.html" class="query-params-link">Protecting Virtual Machines</a></span>
+  <span class="prev"><a href="module02-lab01-pacman.html" class="query-params-link">Deploy a Sample Application</a></span>
+  <span class="next"><a href="module02-lab03-backup-recovery.html" class="query-params-link">Backup and Recover our Application</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

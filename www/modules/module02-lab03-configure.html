@@ -3,9 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Configuring Location Profiles :: Backup/DR/Mobility with Veeam Kasten</title>
-    <link rel="prev" href="module01-lab01-install.html">
-    <link rel="next" href="module01-lab03-backup-restore.html">
+    <title>Lab 2 - Configure Kasten :: Lab 15 - Backup/DR with Veeam Kasten K10</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -18,7 +16,7 @@
       <a class="navbar-item" href="https://demo.redhat.com" target="_blank" style="margin-left: 5%;">
          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1008.5 178.739" style="width: 200px;"><g fill="#fff"><path d="M316.6 63.2v-56H342a21.279 21.279 0 0 1 7.8 1.3 18.111 18.111 0 0 1 5.9 3.5 15.577 15.577 0 0 1 5 11.8 15.051 15.051 0 0 1-3.1 9.5 16.836 16.836 0 0 1-8.4 5.8l12.5 24.1h-9.3l-11.6-23H325v23Zm24.7-48.6H325v18.7h16.3q5.25 0 8.1-2.7a8.7 8.7 0 0 0 2.8-6.6 8.7 8.7 0 0 0-2.8-6.6c-1.8-1.9-4.5-2.8-8.1-2.8ZM364.1 42.8a20.674 20.674 0 0 1 1.6-8.2 20.288 20.288 0 0 1 4.3-6.7 19.92 19.92 0 0 1 6.5-4.5 19.718 19.718 0 0 1 8-1.6 18.463 18.463 0 0 1 7.8 1.6 18.677 18.677 0 0 1 6.2 4.5 20.927 20.927 0 0 1 4.1 6.8 23.2 23.2 0 0 1 1.5 8.4v2.3H372a13.822 13.822 0 0 0 4.6 8.4 13.6 13.6 0 0 0 9.1 3.3 15.553 15.553 0 0 0 5.7-1 12.858 12.858 0 0 0 4.6-2.6l5.1 5a25.983 25.983 0 0 1-7.4 4.1 24.69 24.69 0 0 1-8.4 1.3 21.306 21.306 0 0 1-8.4-1.6 22.763 22.763 0 0 1-6.8-4.4 20.788 20.788 0 0 1-4.5-6.7 23.2 23.2 0 0 1-1.5-8.4Zm20.2-14.2a11.527 11.527 0 0 0-8 3 13.046 13.046 0 0 0-4.2 7.8h24.2a13.091 13.091 0 0 0-4.2-7.8 11.106 11.106 0 0 0-7.8-3ZM443.1 63.2v-3.8a19.448 19.448 0 0 1-5.8 3.3 18.924 18.924 0 0 1-6.7 1.2 19.824 19.824 0 0 1-14.6-6.1 22.268 22.268 0 0 1-4.4-6.7 21.812 21.812 0 0 1 0-16.4A20.534 20.534 0 0 1 416 28a19.335 19.335 0 0 1 6.6-4.5 20.334 20.334 0 0 1 8.2-1.6 20.7 20.7 0 0 1 6.6 1 19.415 19.415 0 0 1 5.7 3V7.2l8-1.8v57.8Zm-25.2-20.4a13.718 13.718 0 0 0 4 10.1 13.45 13.45 0 0 0 9.8 4.1 14.956 14.956 0 0 0 6.4-1.3 15.954 15.954 0 0 0 4.9-3.6V33.6a14.988 14.988 0 0 0-4.9-3.5 15.271 15.271 0 0 0-6.4-1.3 13.423 13.423 0 0 0-9.9 4 13.806 13.806 0 0 0-3.9 10ZM478.1 63.2v-56h8.4v24h29.8v-24h8.4v56h-8.4V38.8h-29.8v24.4ZM547.2 64a16.483 16.483 0 0 1-10.8-3.5 11.037 11.037 0 0 1-4.2-8.9 10.375 10.375 0 0 1 4.7-9.2 20.76 20.76 0 0 1 11.8-3.2 27.841 27.841 0 0 1 5.8.6 27.374 27.374 0 0 1 5.3 1.6v-4.3a8.143 8.143 0 0 0-2.6-6.5 11.452 11.452 0 0 0-7.4-2.2 20.788 20.788 0 0 0-6 .9 34.616 34.616 0 0 0-6.6 2.6l-3-6a54.169 54.169 0 0 1 8.4-3.1 33.18 33.18 0 0 1 8.3-1.1c5.2 0 9.3 1.3 12.2 3.8s4.4 6.1 4.4 10.8v27h-7.8v-3.5a19.441 19.441 0 0 1-5.8 3.2 23.54 23.54 0 0 1-6.7 1Zm-7.3-12.6a5.646 5.646 0 0 0 2.6 4.8 11.193 11.193 0 0 0 6.6 1.8 16.256 16.256 0 0 0 5.9-1 14.449 14.449 0 0 0 4.9-2.9V47a19.778 19.778 0 0 0-4.8-1.8 24.933 24.933 0 0 0-5.7-.6 11.859 11.859 0 0 0-6.8 1.8 5.728 5.728 0 0 0-2.7 5ZM580.6 53.2v-24H572v-6.7h8.6V12.1l7.9-1.9v12.3h12v6.7h-12v22.1a5.94 5.94 0 0 0 1.4 4.4c.9.9 2.5 1.3 4.6 1.3a23.637 23.637 0 0 0 3-.2 10.857 10.857 0 0 0 2.8-.8v6.7a19.28 19.28 0 0 1-3.8.9 27.484 27.484 0 0 1-3.8.3c-3.9 0-7-.9-9-2.8-2-1.7-3.1-4.4-3.1-7.9Z"></path></g><path d="M127 90.2c12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4L149.8 37c-1.7-7.1-3.2-10.3-15.7-16.6-9.7-5-30.8-13.1-37.1-13.1-5.8 0-7.5 7.5-14.4 7.5-6.7 0-11.6-5.6-17.9-5.6-6 0-9.9 4.1-12.9 12.5 0 0-8.4 23.7-9.5 27.2a4.216 4.216 0 0 0-.3 1.9c0 9.2 36.3 39.4 85 39.4Zm32.5-11.4c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3C21.8 58.8 0 61.8 0 81c0 31.5 74.6 70.3 133.7 70.3 45.3 0 56.7-20.5 56.7-36.6-.1-12.8-11-27.3-30.9-35.9Z" fill="#e00"></path><path d="M159.5 78.8c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3l3.7-9.1a4.877 4.877 0 0 0-.3 2c0 9.2 36.3 39.4 85 39.4 12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4Z"></path><path d="M253.5 158.7a2.22 2.22 0 0 1-2.2-2.2V2.2a2.2 2.2 0 0 1 4.4 0v154.2a2.242 2.242 0 0 1-2.2 2.3Z" fill="#fff"></path><text data-name="Demo Platform" transform="translate(1186 149)" fill="#e00" font-size="82" font-family="'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif" font-weight="700"><tspan x="-877.892" y="0">One</tspan></text></svg>
       </a>
-      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Backup/DR/Mobility with Veeam Kasten</a>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Lab 15 - Backup/DR with Veeam Kasten K10</a>
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
@@ -38,7 +36,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html" class=" query-params-link">Backup/DR/Mobility with Veeam Kasten</a></h3>
+    <h3 class="title"><a href="index.html" class=" query-params-link">Lab 15 - Backup/DR with Veeam Kasten K10</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -47,12 +45,12 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
+    <a class="nav-link" href="#module01-intro.adoc">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab01-install.html">Installing Veeam Kasten</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module01-lab02-location-profile.html">Configuring Veeam Kasten for Backups</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -68,19 +66,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
+    <a class="nav-link" href="#module02-intro.adoc">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab02-configure.html">Configure Kasten for Backup</a>
+    <a class="nav-link" href="module02-lab02-backup-recovery.html">Backup and Recover our Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab03-backup-recovery.html">Backup and Recover our Application</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module02-lab04-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
+    <a class="nav-link" href="module02-lab03-blueprints.html">Provide Application Consistent Backups via Kasten Blueprints</a>
   </li>
 </ul>
   </li>
@@ -94,7 +89,7 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <span class="title">Backup/DR/Mobility with Veeam Kasten</span>
+      <span class="title">Lab 15 - Backup/DR with Veeam Kasten K10</span>
       <ul class="versions">
         <li class="version is-current">
           <a href="index.html">master</a>
@@ -111,180 +106,47 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Backup/DR/Mobility with Veeam Kasten</a></li>
-    <li><a href="module01-intro.html">Module 1 - Protecting Virtual Machines on OpenShift with Veeam Kasten</a></li>
-    <li><a href="module01-lab02-location-profile.html">Configuring Veeam Kasten for Backups</a></li>
+    <li><a href="index.html">Lab 15 - Backup/DR with Veeam Kasten K10</a></li>
+    <li><a href="module02-lab03-configure.html">Lab 2 - Configure Kasten</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Configuring Location Profiles</h1>
-<div class="sect1">
-<h2 id="_1_introduction"><a class="anchor" href="#_1_introduction"></a>1. Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You have now configured everything required to perform a local snapshot of a Kubernetes application using Kasten - <em>but snapshots are not backup!</em> In order to restore in the event the local cluster or primary storage is compromised, a copy of that data should be exported to another location.</p>
-</div>
-<div class="paragraph">
-<p>The configuration of these backup targets are called <strong><em>Location Profiles</em></strong>.
-Kasten <a href="https://docs.kasten.io/latest/usage/configuration.html">supports several options</a>, including:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>AWS S3</p>
-</li>
-<li>
-<p>Azure Blob</p>
-</li>
-<li>
-<p>Google Cloud Storage</p>
-</li>
-<li>
-<p>S3-Compatible</p>
-</li>
-<li>
-<p>NFS</p>
-</li>
-<li>
-<p>Veeam Backup &amp; Recovery</p>
-</li>
+<h1 class="page">Lab 2 - Configure Kasten</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_part_1_configure_cluster_storage_for_kasten">📖 Part 1. Configure cluster storage for Kasten</a></li>
+<li><a href="#_part_2_configure_an_s3_compatible_object_store_for_backup">📖 Part 2. Configure an S3-compatible Object Store for Backup</a></li>
+<li><a href="#_part_3_create_a_policy">📖 Part 3. Create A Policy</a></li>
+<li><a href="#_part_4_takeaways">🏁 Part 4. Takeaways</a></li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Kasten supports the creation of immutable backups to ensure that, as a last line of defense against ransomware, backup data cannot be manipulated or deleted by any user.
-These backups are supported on the following platforms:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>AWS S3</p>
-</li>
-<li>
-<p>S3-Compatible with Object Lock support (ex.
-Ceph, MinIO, Wasabi, etc.)</p>
-</li>
-<li>
-<p>Azure Blob</p>
-</li>
-<li>
-<p>Google Cloud Storage</p>
-</li>
-</ul>
-</div>
-<hr>
-<div class="paragraph">
-<p><em>In this exercise, you will configure a bucket using the on-cluster Ceph Object Gateway deployment and add the bucket as a Location Profile in Kasten.</em></p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-In a real world environment you should never back up data to the same infrastructure you are intending to protect - using on-cluster storage as a backup target is performed in the lab solely to simplify lab staging and instructions.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_2_configuring_an_object_bucket_claim_to_store_backups"><a class="anchor" href="#_2_configuring_an_object_bucket_claim_to_store_backups"></a>2. Configuring an Object Bucket Claim to Store Backups</h2>
+<h2 id="_part_1_configure_cluster_storage_for_kasten"><a class="anchor" href="#_part_1_configure_cluster_storage_for_kasten"></a>📖 Part 1. Configure cluster storage for Kasten</h2>
 <div class="sectionbody">
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Kasten supports immutable object storage and it is recommended to protect backups against accidental deletion or ransomware attack. For this lab, we won&#8217;t configure immutability as it requires elevated permissions.
-</td>
-</tr>
-</table>
-</div>
-</div>
+<div class="paragraph">
+<p>{: .important } &gt; Prior to configuring backups, we need to ensure our cluster storage is capable of performing snapshots of our persistent data workloads. &gt; Because our cluster is deployed on top of Amazon EC2, we can leverage EBS storage and it’s associated CSI driver to perform volume snapshot operations. &gt; &gt; To do so, we need to ensure our VolumeSnapshotClass object created on the cluster for the ebs.csi.aws.com provisioner is correctly annotated. We need to add the annotation &gt; <em>k10.kasten.io/is-snapshot-class: "`true`"</em></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If you haven&#8217;t yet logged into the <a href="https://console.example.com" target="_blank" rel="noopener">OpenShift console</a> log into the console now.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Your UserID is <code>user1</code> with password <code>redhat</code>.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Open an OpenShift command line terminal</p>
-<div class="imageblock">
+<p>On the bastion host, run the following command to patch the csi-aws-vsc VolumeSnapshotClass so Kasten can use it to perform snapshot operations</p>
+<div class="listingblock">
 <div class="content">
-<img src="_images/module01-lab02-location-profile/002.png" alt="002">
-</div>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If this is the first time you are opening a terminal you may need to <strong>Create a Project</strong> first to run your terminal pod in. In that case make sure you use <code>terminal-user1</code> as your project name to ensure that it is unique to you. Then click the blue <strong>Start</strong> button.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab02-location-profile/002a.png" alt="002a">
-</div>
-</div>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc annotate volumesnapshotclass $(oc get volumesnapshotclass \
+-o=jsonpath='{.items[?(@.metadata.annotations.snapshot\.storage\.kubernetes\.io\/is-default-class=="true")].metadata.name}') \
+k10.kasten.io/is-snapshot-class=true</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>An <code>ObjectBucketClaim</code> has already been created for you. You can examine the claim using the following command:</p>
-<div class="listingblock execute">
+<p>Run the following command to validate the VolumeSnapshotClass has been annotated</p>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe objectbucketclaim -n backuptarget-user1 kastenbackups-user1</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get volumesnapshotclasses.snapshot.storage.k8s.io csi-aws-vsc -o yaml</code></pre>
 </div>
-</div>
-</li>
-<li>
-<p>Run the following command to retrieve the Access Key for the bucket:</p>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get secret -n backuptarget-user1 kastenbackups-user1 \
-  -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 --decode && echo</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Copy the Access Key to a text editor as it will be needed again shortly</p>
-</div>
-</li>
-<li>
-<p>Run the following command to retrieve the Secret Key for the bucket:</p>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get secret -n backuptarget-user1 kastenbackups-user1 \
- -o jsonpath='{.data.AWS_SECRET_ACCESS_KEY}' | base64 --decode && echo</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Copy the Secret Key to a text editor as it will be needed again shortly.</p>
 </div>
 </li>
 </ol>
@@ -292,20 +154,27 @@ If this is the first time you are opening a terminal you may need to <strong>Cre
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_creating_an_s3_compatible_location_profile"><a class="anchor" href="#_3_creating_an_s3_compatible_location_profile"></a>3. Creating an S3-Compatible Location Profile</h2>
+<h2 id="_part_2_configure_an_s3_compatible_object_store_for_backup"><a class="anchor" href="#_part_2_configure_an_s3_compatible_object_store_for_backup"></a>📖 Part 2. Configure an S3-compatible Object Store for Backup</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><em>Before we can begin protecting our apps, we need to define a location for Kasten to export backup off of the cluster and primary storage.</em></p>
+</div>
+<div class="paragraph">
+<p><em>As part of the lab environment staging, a MinIO Object Storage server has already been deployed to your cluster. This server provides a single bucket, <code>kasten-bucket</code>, that you will use as a backup target.</em></p>
+</div>
+<div class="paragraph">
+<p>{: .warning } &gt; This is a lab environment. In production, exporting your backups to the same storage as what you’re trying to protect would really defeat the purpose - don’t you think?</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In the <strong><em>Kasten Dashboard</em></strong>, select <strong><em>Profiles → Location</em></strong> from the sidebar and click <strong><em>+ Add New</em></strong>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab02-location-profile/01.png" alt="01">
-</div>
-</div>
+<p>In the projects drop-down in OpenShift, select kasten-io.</p>
 </li>
 <li>
-<p>Fill out the following fields and click <strong><em>Next</em></strong>:</p>
+<p>Find the URL of the Kasten instance by navigating to Networing &gt; Routes in the OpenShift console. Click the Location URL <span class="image unresolved"><img src="./assets/images/kasten_route.png" alt="Kasten Route"></span> <em>Ensure you have the kasten-io project selected</em></p>
+</li>
+<li>
+<p>When prompted for login details, enter the following:</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -313,126 +182,227 @@ If this is the first time you are opening a terminal you may need to <strong>Cre
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top"></th>
-<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top"><strong>Username</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Password</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Location Profile Name</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kastenbackups-user1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kasten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kasten123</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>When prompted, enter your email and organization and accept the EULA: <span class="image unresolved"><img src="./assets/images/eula.png" alt="EULA"></span></p>
+</li>
+<li>
+<p>Take a quick tour if you’d like, otherwise just click &#8220;No, Thanks&#8221;</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/take_a_tour.png" alt="Take a Tour">
+</div>
+<div class="title">Figure 1. Take a Tour</div>
+</div>
+</li>
+<li>
+<p>From the <strong><em>Kasten Dashboard</em></strong> using the menu on the left, navigate to <strong><em>Profiles</em></strong> &gt; <strong><em>Location</em></strong></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/profiles.png" alt="settings">
+</div>
+<div class="title">Figure 2. settings</div>
+</div>
+</li>
+<li>
+<p>Under <strong><em>Locations</em></strong>, click the <strong><em>&#43; New Profile</em></strong> button.</p>
+</li>
+<li>
+<p>From the environment configuration details for your cluster, copy the hostname of your bastion host to your clipboard (the part after <em>lab-user@</em>). It should look similar to:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bastion.xyza.sandbox1234.opentlc.com</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Fill out the following fields:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Field</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Profile Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minio</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Storage Provider</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 Compatible</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select <em>S3 Compatible</em>(NOTE: This is a separate option from Amazon S3)</p></td>
 </tr>
-</tbody>
-</table>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab02-location-profile/02.png" alt="02">
-</div>
-</div>
-</li>
-<li>
-<p>Fill out the following fields <strong><em>but DO NOT click Next yet!</em></strong>:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"></th>
-<th class="tableblock halign-left valign-top"></th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>S3 Access Key</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paste <code>ACCESS KEY</code> value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minioaccess</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>S3 Secret</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paste <code>SECRET KEY</code> value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>miniosecret</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Endpoint</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bucket.example.com</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type <em>http://</em> Paste the URL from Step 2, followed by <em>:9000</em>(eg. <code><a href="http://&lt;bastion_host_FQDN&gt;:9000" class="bare">http://&lt;bastion_host_FQDN&gt;:9000</a></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Skip certificate chain and hostname verification</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Checked</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leave unselected</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Region</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">us-east-2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Bucket</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kastenbackups-user1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kasten-bucket</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Enable Immutable Backups</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leave unselected</p></td>
 </tr>
 </tbody>
 </table>
-<div class="imageblock">
+<div class="imageblock unresolved">
 <div class="content">
-<img src="_images/module01-lab02-location-profile/02b.png" alt="02b">
+<img src="./assets/images/new-profile.png" alt="new profile">
 </div>
+<div class="title">Figure 3. new profile</div>
 </div>
 </li>
 <li>
-<p>Click <strong><em>Next</em></strong> followed by <strong><em>Submit</em></strong> to create the Location Profile.</p>
+<p>Click <strong>Save Profile</strong></p>
 <div class="paragraph">
-<p>You should expect your <code>kastenbackups-user1</code> Location Profile to appear with a <strong><em>Success</em></strong> status.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module01-lab02-location-profile/05.png" alt="05">
-</div>
-</div>
-<div class="paragraph">
-<p>Now you&#8217;re ready to start protecting apps!</p>
+<p>{: .note } &gt; Occassionally, the Minio server fails to start during the lab’s provisioning. If this happens, you will see an error at this step stating <strong>&#8220;There was a problem validating the profile&#8221;</strong>: &gt; <span class="image unresolved"><img src="./assets/images/problem_validating_profile.png" alt="Problem Validating Profile"></span> &gt; If this occurs, you can manually start the server on the bastion host by connecting to it via SSH and running the following two commands: &gt; <code>bash &gt; sudo su ec2-user &gt; /usr/local/bin/minio server /home/ec2-user/minio --console-address :9090 &gt;/dev/null 2&gt;&amp;1 &amp; &gt;</code> &gt; After doing so, return to the Kasten UI and click <strong>Save Profile</strong> again and Kasten should be able to validate the location profile.</p>
 </div>
 </li>
 <li>
-<p>Click the <strong><em>&#8230;&#8203;</em></strong> menu and select <strong><em>View YAML</em></strong> to view the manifest generated by creating a Location Profile through the Dashboard.</p>
-<div class="imageblock">
+<p>Verify the <strong><em>STATUS</em></strong> of your Location Profile is <strong><em>Valid</em></strong>.</p>
+<div class="imageblock unresolved">
 <div class="content">
-<img src="_images/module01-lab02-location-profile/06.png" alt="06">
+<img src="./assets/images/valid-profile.png" alt="valid profile">
 </div>
+<div class="title">Figure 4. valid profile</div>
 </div>
 <div class="paragraph">
-<p>As you can see from this example, Kasten Location Profiles can be created declaratively as a <code>profile.config.kio.kasten.io</code> object referencing a Secret to store access and secret keys.
-This Kubernetes-native implementation makes it simple to configure backup targets using a GitOps approach.</p>
+<p><em>This indicates Kasten was able to successfully authenticate and access the specified object storage bucket.</em></p>
 </div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-See <a href="https://docs.kasten.io/latest/api/profiles.html">docs.kasten.io</a> for complete documentation on defining Profile API objects.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Click <strong><em>Cancel</em></strong> or the <strong><em>X</em></strong> in the upper-right to close the YAML window.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="module01-lab01-install.html" class="query-params-link">Installing Veeam Kasten</a></span>
-  <span class="next"><a href="module01-lab03-backup-restore.html" class="query-params-link">Protecting Virtual Machines</a></span>
-</nav>
+<div class="sect1">
+<h2 id="_part_3_create_a_policy"><a class="anchor" href="#_part_3_create_a_policy"></a>📖 Part 3. Create A Policy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Before performing a Kasten install, the &#8220;Primer Script&#8221; can quickly spot any potential problems with our cluster configuration.</em></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <strong><em>&lt; Dashboard</em></strong> to return to the Kasten main dashboard, click <strong><em>Applications</em></strong> to view all applications discovered by Kasten on the cluster.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/click-apps.png" alt="click apps">
+</div>
+<div class="title">Figure 5. click apps</div>
+</div>
+</li>
+<li>
+<p>Type <code>pacman</code> in the filter search bar, then click the <strong><em>Create a Policy</em></strong> button.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/create-policy-button.png" alt="create policy button">
+</div>
+<div class="title">Figure 6. create policy button</div>
+</div>
+</li>
+<li>
+<p>Leave the default name and optionally add a comment. By default, the policy will generate hourly snapshots of the application with a standard retention policy. Leave these defaults.</p>
+</li>
+<li>
+<p>Scroll down slightly and toggle <strong><em>Enable Backups via Snapshot Exports</em></strong> to the ON position and select <code>minio</code> as the <strong><em>Export Location Profile</em></strong>.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/enable-exports.png" alt="enable exports">
+</div>
+<div class="title">Figure 7. enable exports</div>
+</div>
+</li>
+<li>
+<p>Under <strong><em>Select Applications</em></strong> observe that we are explicitly protecting all resources in the <code>pacman</code> namespace.</p>
+<div class="paragraph">
+<p>{: .note } A single Kasten policy can also protect multiple namespaces, and can even do so dynamically via Kubernetes labels.</p>
+</div>
+</li>
+<li>
+<p>Leave all other defaults and click <strong><em>Create Policy</em></strong>.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/create-policy.png" alt="create policy">
+</div>
+<div class="title">Figure 8. create policy</div>
+</div>
+</li>
+<li>
+<p>You will be returned to the <strong><em>Policies</em></strong> page. On your new <code>pacman-backup</code> Policy, click the <strong><em>YAML</em></strong> button to view the Kubernetes manifest.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="./assets/images/policy-yaml.png" alt="policy yaml">
+</div>
+<div class="title">Figure 9. policy yaml</div>
+</div>
+<div class="paragraph">
+<p>As native Kubernetes resources, Kasten policies, profiles, and even running backups or restores can be easily implemented via <code>oc</code> or API. Exposing the YAML through the UI makes it easy for administrators to copy and modify existing examples of Kasten resources or actions.</p>
+</div>
+</li>
+<li>
+<p>Click <strong><em>Cancel</em></strong> to close the YAML window.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_part_4_takeaways"><a class="anchor" href="#_part_4_takeaways"></a>🏁 Part 4. Takeaways</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Local snapshots are not backups</p>
+</li>
+<li>
+<p>Configuring off-cluster storage for backup is a good idea</p>
+</li>
+<li>
+<p>Configuring an S3-compatible bucket in Kasten can be done in a few clicks</p>
+</li>
+<li>
+<p>Because Kasten is K8s-native, all actions, policies, resources can be implemented using oc commands or API</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Continue to LAB 3</p>
+</div>
+</div>
+</div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

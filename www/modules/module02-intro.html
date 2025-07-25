@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lab 1 - Deploy a workload :: Backup/DR/Mobility with Veeam Kasten</title>
-    <link rel="prev" href="module02-intro.html">
-    <link rel="next" href="module02-lab02-configure.html">
+    <title>Module 2 - Protecting Containerized Workloads with Veeam Kasten :: Backup/DR/Mobility with Veeam Kasten</title>
+    <link rel="prev" href="module01-lab05-mobility.html">
+    <link rel="next" href="module02-lab01-pacman.html">
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -66,11 +66,11 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module02-lab01-pacman.html">Deploy a Sample Application</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -113,182 +113,51 @@
   <ul>
     <li><a href="index.html">Backup/DR/Mobility with Veeam Kasten</a></li>
     <li><a href="module02-intro.html">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></li>
-    <li><a href="module02-lab01-pacman.html">Deploy a Sample Application</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Lab 1 - Deploy a workload</h1>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_1_deploying_pacman_with_helm">1. Deploying Pacman with Helm</a></li>
-<li><a href="#_2_lets_play_some_pacman">2. Let’s Play some Pacman</a></li>
-<li><a href="#_3_takeaways">3. Takeaways</a></li>
-</ul>
+<h1 class="page">Module 2 - Protecting Containerized Workloads with Veeam Kasten</h1>
+<div class="sect1">
+<h2 id="_1_introduction"><a class="anchor" href="#_1_introduction"></a>1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This lab guide is intended to familiarize practitioners with the protection of OpenShift containerized workloads using <strong><em>Veeam Kasten for Kubernetes</em></strong>.
+It assumes the learner is familiar with container provisioning, whether via OpenShift Operator or via helm, and management in OpenShift.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_1_deploying_pacman_with_helm"><a class="anchor" href="#_1_deploying_pacman_with_helm"></a>1. Deploying Pacman with Helm</h2>
+<h2 id="_2_how_does_kasten_work"><a class="anchor" href="#_2_how_does_kasten_work"></a>2. How does Kasten work?</h2>
 <div class="sectionbody">
-<div class="exampleblock">
+<div class="imageblock">
 <div class="content">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-In this module, we will be deploying a containerized application. Ensure that you create a new, different namespace than what you may have created in the previous module (<code>kasten-lab-user1</code>) in the previous lab, we suggest kasten-lab-user1-pacman. This will ensure that the application is isolated from the previous lab and can be easily managed.
-</td>
-</tr>
-</table>
-</div>
+<img src="_images/module01-lab01-install/00.png" alt="00">
 </div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new namespace for the Pacman application</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create namespace `kasten-lab-{user}-pacman`</code></pre>
-</div>
-</div>
+<p>Kasten is deployed to the cluster that it protects.
+Within the cluster, Kasten communicates with the Kubernetes API server to discover applications and VMs and their resources.</p>
 </li>
 <li>
-<p>Add the repository to install Pacman:</p>
-<div class="literalblock">
-<div class="content">
-<pre>helm repo add pacman https://shuguet.github.io/pacman/
-helm repo update</pre>
-</div>
-</div>
+<p>Kasten orchestrates point-in-time snapshots of complete applications, including both VM and application manifest data and storage volume data.</p>
 </li>
 <li>
-<p>Run the following to install the <code>pacman/pacman</code> Helm Chart:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm install pacman pacman/pacman -n kasten-lab-{user}-pacman \
---set route.create=true \
---set mongodb.containerSecurityContext.enabled=false \
---set mongodb.podSecurityContext.enabled=false \
---set containerSecurityContext.runAsNonRoot=true</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><em>It will take a few moments for the command to return, this is normal!</em></p>
-</div>
+<p>Kasten exports portable copies of the point-in-time snapshot to an external object, NFS, or Veeam repository.</p>
 </li>
 <li>
-<p>Return to the OpenShift Console in your browser and verify the Chart has successfully provisioned 3 Pods, <code>pacman-*</code> and <code>pacman-mongodb-*</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module02-lab01-pacman/pacman_pods.png" alt="pacman pods">
-</div>
-<div class="title">Figure 1. pacman pods</div>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Ensure you have the <code>kasten-lab-user1-pacman</code> project selected in the Project drop-down
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<p>Kasten provides application consistent and logical backups via <a href="https://kanister.io">Kanister Blueprints</a>, which allow users to define backup policies that ensure all components of an application are captured in a consistent state.</p>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_2_lets_play_some_pacman"><a class="anchor" href="#_2_lets_play_some_pacman"></a>2. Let’s Play some Pacman</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Now that our pacman application has been deployed, let’s play some pacman. First we need to access the Pacman front end. To find the URL, within the OpenShift console and navigate within the OpenShift console to Networking &gt; Routes</p>
-</li>
-<li>
-<p>Ensure you have the pacman project selected. You should see an entry named pacman-route</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module02-lab01-pacman/pacman_route.png" alt="pacman route">
-</div>
-<div class="title">Figure 2. pacman route</div>
-</div>
-</li>
-<li>
-<p>Click on the Location to launch pacman</p>
-<div class="exampleblock">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If pacman doesn’t load in the browser, ensure that the address bar is using HTTP (<a href="http://pacman-route-pacman" class="bare">http://pacman-route-pacman</a>), <em>not</em> HTTPS &gt; Occasionally browsers may try to force you to an HTTPS page which will not work for our default pacman app
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Play a short game, and enter your name once you’re done to add your name to the leaderboard.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module02-lab01-pacman/pacman_game.png" alt="pacman game">
-</div>
-<div class="title">Figure 3. pacman game</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module02-lab01-pacman/pacman_leaderboard.png" alt="pacman leaderboard">
-</div>
-<div class="title">Figure 4. pacman leaderboard</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_3_takeaways"><a class="anchor" href="#_3_takeaways"></a>3. Takeaways</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Deploying applications from helm charts is quick and easy</p>
-</li>
-<li>
-<p>OpenShift makes exposing applications via routes simple</p>
-</li>
-<li>
-<p>Pacman is still fun</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Continue to LAB 2</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module02-intro.html" class="query-params-link">Module 2 - Protecting Containerized Workloads with Veeam Kasten</a></span>
-  <span class="next"><a href="module02-lab02-configure.html" class="query-params-link">Configure Kasten for Backup</a></span>
+  <span class="prev"><a href="module01-lab05-mobility.html" class="query-params-link">Migrating Workloads</a></span>
+  <span class="next"><a href="module02-lab01-pacman.html" class="query-params-link">Deploy a Sample Application</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

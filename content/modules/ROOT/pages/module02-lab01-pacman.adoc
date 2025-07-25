@@ -6,7 +6,7 @@
 ====
 [IMPORTANT]
 
-In this module, we will be deploying a containerized application. Ensure that you create a new, different namespace than what you may have created in the previous module (`kasten-lab-{user}`) in the previous lab, you can continue using that project.
+In this module, we will be deploying a containerized application. Ensure that you create a new, different namespace than what you may have created in the previous module (`kasten-lab-{user}`) in the previous lab, we suggest kasten-lab-{user}-pacman. This will ensure that the application is isolated from the previous lab and can be easily managed.
 ====
 . Add a new namespace for the Pacman application
 +
